@@ -7,7 +7,7 @@ class Driver {
     }
     draw() {
         const image = new Image();
-        image.src = '/Users/stefanopisani/Desktop/game/images/pngegg.png';
+        image.src = '/Users/stefanopisani/Desktop/game/delivery-vespa/images/pngegg.png';
         context.drawImage(image, this.x, this.y, this.width, this.height);
     }
     moveUp() {
