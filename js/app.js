@@ -24,11 +24,11 @@ function updateCanvas() {
     // target appears
     if (frames > 1200) {
         house1.draw();
-        house1.y += 0.3;
+        // house1.y += 0.3;
     }
 
     // obstacle 1
-    if (frames % 170 === 0) {
+    if (frames % 190 === 0) {
         const height = 80;
         const width = 80;
         const minX = 50;
@@ -40,7 +40,7 @@ function updateCanvas() {
     }
 
     // New obstacle - taxi
-    if (frames % 387 === 0) {
+    if (frames % 487 === 0) {
         const height = 80;
         const width = 80;
         const minX = 50;
@@ -52,7 +52,7 @@ function updateCanvas() {
     }
 
     // Police 
-    if (frames % 753 === 0) {
+    if (frames % 853 === 0) {
         const height = 80;
         const width = 80;
         const minX = 50;
@@ -64,7 +64,7 @@ function updateCanvas() {
     }
 
     // other car
-    if (frames % 291 === 0) {
+    if (frames % 301 === 0) {
         const height = 80;
         const width = 80;
         const minX = 50;
@@ -102,14 +102,16 @@ function updateCanvas() {
     // time's up
     if (frames > 1750 && !targetReached()) {
         alert('Too late the pizza is cold! Try again...');
-        location.reload();
         context.clearRect(0, 0, canvas.width, canvas.height);
+        location.reload();
+
     }
     // target reached
     if (frames > 1200 && targetReached()) {
         alert('Congrats, target reached!!!!');
-        location.reload();
         context.clearRect(0, 0, canvas.width, canvas.height);
+        location.reload();
+
     }
     requestAnimationFrame(updateCanvas);
 }

@@ -10,18 +10,37 @@
 </head>
 
 <body>
-    <div class="game-intro">
-        <img src="" alt="" class="logo-img" />
-        <br />
-        <button id="start-button">StartGame</button>
-        <p>Use the arrows to control the Vespa!</p>
-        <img src="" alt="" class="arrows-img" />
-    </div>
 
-    <div id="game-board">
-        <canvas id="canvas" width="500" height="700"
-            style="background-image: url('/Users/stefanopisani/Desktop/March21/Module1_week2/labs/lab-canvas-race-car/images/road.png');background-repeat: no-repeat;background-size: cover;"></canvas>
-    </div>
+    <section class="main">
+        <div class="game-intro">
+            <h1> PIZZA DELIVERY </h1>
+            <h2> Deliver the pizza on time <br> and be careful on the road! </h2>
+            <button id="start-button">StartGame</button>
+            <p>Use the arrows to control the Vespa
+                <img src="/Users/stefanopisani/Desktop/game/delivery-vespa/images/pngegg.png" alt="vespa" id="vespa">
+            </p>
+            <p>
+                Avoid the traffic and deliver ASAP!!
+            </p>
+            <div>
+                <img src="/Users/stefanopisani/Desktop/game/delivery-vespa/images/Topdown_vehicle_sprites_pack/Audi.png"
+                    alt="vespa" class="icons">
+                <img src="/Users/stefanopisani/Desktop/game/delivery-vespa/images/Topdown_vehicle_sprites_pack/taxi.png"
+                    alt="vespa" class="icons">
+                <img src="/Users/stefanopisani/Desktop/game/delivery-vespa/images/Topdown_vehicle_sprites_pack/police.png"
+                    alt="vespa" class="icons">
+            </div>
+
+        </div>
+
+        <div id="game-board">
+            <canvas id="canvas" width="500" height="700"
+                style="background-image: url('/Users/stefanopisani/Desktop/March21/Module1_week2/labs/lab-canvas-race-car/images/road.png');background-repeat: no-repeat;background-size: cover;"></canvas>
+        </div>
+    </section>
+
+
+
     <script type="text/javascript" src="js/obstacles.js"></script>
     <script type="text/javascript" src="js/target.js"></script>
     <script type="text/javascript" src="js/delivery-boy.js"></script>

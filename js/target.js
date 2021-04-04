@@ -7,7 +7,7 @@ class Target {
     }
     draw() {
         const house = new Image();
-        house.src = '/Users/stefanopisani/Desktop/game/delivery-vespa/images/lisboa.png';
+        house.src = '/Users/stefanopisani/Desktop/game/delivery-vespa/images/house2.png';
         context.drawImage(house, this.x, this.y, this.width, this.height);
     }
 }
