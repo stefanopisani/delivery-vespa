@@ -53,3 +53,31 @@ class Obstacle4 {
         context.drawImage(obstacleCar, this.x, this.y, this.width, this.height);
     }
 }
+
+class Ambulance {
+    constructor(x, y, width, height) {
+        this.x = x;
+        this.y = y;
+        this.width = width;
+        this.height = height;
+    }
+    draw() {
+        const obstacleCar = new Image();
+        obstacleCar.src = '/Users/stefanopisani/Desktop/game/delivery-vespa/images/Topdown_vehicle_sprites_pack/Ambulance.png';
+        context.drawImage(obstacleCar, this.x, this.y, this.width, this.height);
+    }
+}
+
+class Truck {
+    constructor(x, y, width, height) {
+        this.x = x;
+        this.y = y;
+        this.width = width;
+        this.height = height;
+    }
+    draw() {
+        const obstacleCar = new Image();
+        obstacleCar.src = '/Users/stefanopisani/Desktop/game/delivery-vespa/images/Topdown_vehicle_sprites_pack/truck.png';
+        context.drawImage(obstacleCar, this.x, this.y, this.width, this.height);
+    }
+}

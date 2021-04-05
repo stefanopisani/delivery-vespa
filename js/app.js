@@ -1,19 +1,30 @@
 const canvas = document.querySelector('#canvas');
 const context = canvas.getContext('2d');
+let animationId;
+
 document.getElementById('game-board').style.display = 'none';
 document.querySelector('.left-side').style.display = 'none';
+document.getElementById('win').style.display = 'none';
 
 document.getElementById('start-button').onclick = () => {
     startGame();
 };
 
 const player1 = new Driver(200, 650);
-const house1 = new Target(120, 0, 100, 100);
+const house1 = new Target(120, 0, 150, 150);
+const house2 = new Target2(230, 0, 150, 150);
+const tram = new Tram(380, 0, 120, 150);
+const tram2 = new Tram(380, 0, 120, 150);
+const tram3 = new Tram(0, 0, 120, 150);
+
 let frames = 0;
 let obstacles = [];
+let currentLevel = 1;
+
 
 function startGame() {
     document.querySelector('.game-intro').style.display = 'none';
+    document.getElementById('win').style.display = 'none';
     document.getElementById('game-board').style.display = 'block';
     document.querySelector('.left-side').style.display = 'block';
     player1.draw();
@@ -28,12 +39,26 @@ function updateCanvas() {
     mySound.play();
     frames += 1;
 
+    // DECORATIONS:
+    if (frames > 300) {
+        tram.draw();
+        tram.y += 1;
+    }
+    if (frames > 700) {
+        tram3.draw();
+        tram3.y += 1;
+    }
+    if (frames > 900) {
+        tram2.draw();
+        tram2.y += 1;
+    }
+
+
     // target appears
     if (frames > 1200) {
         house1.draw();
         mySound.stop();
         hurryUp.play();
-        // house1.y += 0.3;
     }
 
     if (frames > 1300 && frames < 1375) {
@@ -53,6 +78,15 @@ function updateCanvas() {
         const randomY = 0;
         const newObstacle = new Obstacle(randomX, randomY, width, height);
         obstacles.push(newObstacle);
+    }
+
+
+    if (currentLevel === 1) {
+        level1();
+    }
+
+    function level1() {
+
     }
 
     // New obstacle - taxi
@@ -124,7 +158,7 @@ function updateCanvas() {
             (player1.y + player1.height < house1.y));
     }
     // time's up
-    if (frames > 1750 && !targetReached()) {
+    if (frames > 1750 && !targetReached()) { //**** MUSIC NOT WORKING */
         hurryUp.stop();
         gameOver.play();
         alert('Too late the pizza is cold! Try again...');
@@ -136,12 +170,20 @@ function updateCanvas() {
     }
     // target reached
     if (frames > 1200 && targetReached()) {
-        alert('Congrats, target reached!!!!');
-        context.clearRect(0, 0, canvas.width, canvas.height);
+        hurryUp.stop();
+        winSong.play();
+        document.getElementById('game-board').style.display = 'none';
+        document.querySelector('.left-side').style.display = 'none';
+        document.getElementById('win').style.display = 'block';
         obstacles = [];
-        frames = 0;
-        location.reload();
-
+        frames--;
+        document.getElementById('restart-button').onclick = () => {
+            currentLevel = 2;
+            player1.y = 600;
+            frames = 0;
+            cancelAnimationFrame(animationId);
+            startGame();
+        };
     }
-    requestAnimationFrame(updateCanvas);
+    animationId = requestAnimationFrame(updateCanvas);
 }

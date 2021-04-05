@@ -18,3 +18,5 @@ const mySound = new sound("/Users/stefanopisani/Desktop/game/delivery-vespa/musi
 const gameOver = new sound("/Users/stefanopisani/Desktop/game/delivery-vespa/music/gameover.mp3");
 
 const hurryUp = new sound("/Users/stefanopisani/Desktop/game/delivery-vespa/music/Donkey Kong '94 (GB) - Hurry Up!.mp3");
+
+const winSong = new sound("/Users/stefanopisani/Desktop/game/delivery-vespa/music/Ending Theme - Super Mario World.mp3");
