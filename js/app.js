@@ -1,5 +1,8 @@
 const canvas = document.querySelector('#canvas');
 const context = canvas.getContext('2d');
+document.getElementById('game-board').style.display = 'none';
+document.querySelector('.left-side').style.display = 'none';
+
 document.getElementById('start-button').onclick = () => {
     startGame();
 };
@@ -10,6 +13,9 @@ let frames = 0;
 let obstacles = [];
 
 function startGame() {
+    document.querySelector('.game-intro').style.display = 'none';
+    document.getElementById('game-board').style.display = 'block';
+    document.querySelector('.left-side').style.display = 'block';
     player1.draw();
     updateCanvas();
 }
@@ -99,12 +105,15 @@ function updateCanvas() {
         if (detectCollision(obstacle)) {
             mySound.stop();
             gameOver.play();
+            alert('BOOOM! Try again...');
+            obstacles = [];
+            location.reload();
+        } else if (detectCollision(obstacle) && frames > 1200) { //**** MUSIC NOT WORKING */
             hurryUp.stop();
             gameOver.play();
             alert('BOOOM! Try again...');
             obstacles = [];
             location.reload();
-
         }
     });
     // collision with target
@@ -116,8 +125,12 @@ function updateCanvas() {
     }
     // time's up
     if (frames > 1750 && !targetReached()) {
+        hurryUp.stop();
+        gameOver.play();
         alert('Too late the pizza is cold! Try again...');
         context.clearRect(0, 0, canvas.width, canvas.height);
+        obstacles = [];
+        frames = 0;
         location.reload();
 
     }
@@ -125,6 +138,8 @@ function updateCanvas() {
     if (frames > 1200 && targetReached()) {
         alert('Congrats, target reached!!!!');
         context.clearRect(0, 0, canvas.width, canvas.height);
+        obstacles = [];
+        frames = 0;
         location.reload();
 
     }

@@ -15,7 +15,28 @@ class Driver {
         context.drawImage(image, this.x, this.y, this.width, this.height);
     }
     newPos() {
-        this.x += this.speedX;
+        if (player1.x > 40) {
+            this.x += this.speedX;
+        } else {
+            player1.x = 40.1;
+        }
+        if (player1.x < 420) {
+            this.x += this.speedX;
+        } else {
+            player1.x = 419.9;
+        }
+        if (player1.y > 10) {
+            this.y += this.speedY;
+        } else {
+            player1.y = 5.1;
+        }
+        if (player1.y < 550) {
+            this.y += this.speedY;
+        } else {
+            player1.y = 550.1;
+        }
+
+
         this.y += this.speedY;
     }
     moveUp() {
