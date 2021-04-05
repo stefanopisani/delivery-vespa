@@ -19,12 +19,22 @@ function updateCanvas() {
     player1.draw();
     player1.moveUp();
     player1.newPos();
+    mySound.play();
     frames += 1;
 
     // target appears
     if (frames > 1200) {
         house1.draw();
+        mySound.stop();
+        hurryUp.play();
         // house1.y += 0.3;
+    }
+
+    if (frames > 1300 && frames < 1375) {
+        context.font = '35px Arial';
+        context.strokeStyle = 'white';
+        context.lineWidth = 2;
+        context.strokeText('Hurry Up!!!', 300, 50);
     }
 
     // obstacle 1
@@ -87,9 +97,14 @@ function updateCanvas() {
                 (player1.y + player1.height < obstacle.y + 5));
         }
         if (detectCollision(obstacle)) {
+            mySound.stop();
+            gameOver.play();
+            hurryUp.stop();
+            gameOver.play();
             alert('BOOOM! Try again...');
             obstacles = [];
             location.reload();
+
         }
     });
     // collision with target
