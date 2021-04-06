@@ -1,18 +1,3 @@
-class Tower {
-    constructor(x, y, width, height) {
-        this.x = x;
-        this.y = y;
-        this.width = width;
-        this.height = height;
-    }
-
-    draw() {
-        const tower = new Image();
-        tower.src = '/Users/stefanopisani/Desktop/game/delivery-vespa/images/belemTower.png';
-        context.drawImage(tower, this.x, this.y, this.width, this.height);
-    }
-}
-
 class Tram {
     constructor(x, y, width, height) {
         this.x = x;
@@ -28,7 +13,7 @@ class Tram {
     }
 }
 
-class Bridge {
+class Explosion {
     constructor(x, y, width, height) {
         this.x = x;
         this.y = y;
@@ -37,8 +22,8 @@ class Bridge {
     }
 
     draw() {
-        const bridge = new Image();
-        bridge.src = '/Users/stefanopisani/Desktop/game/delivery-vespa/images/ponta25.png';
-        context.drawImage(bridge, this.x, this.y, this.width, this.height);
+        const boom = new Image();
+        boom.src = '/Users/stefanopisani/Desktop/game/delivery-vespa/images/booom.png';
+        context.drawImage(boom, this.x, this.y, 100, 100);
     }
 }

@@ -4,6 +4,10 @@ body {
     margin: 0;
     text-align: center;
     font-family: 'Press Start 2P';
+    background-image: url(/Users/stefanopisani/Desktop/game/delivery-vespa/images/pizzabg.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    box-shadow: inset 0 0 0 2000px rgba(0, 0, 0, 0.30);
 }
 
 .main {
@@ -11,12 +15,8 @@ body {
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
-    background-image: url(/Users/stefanopisani/Desktop/game/delivery-vespa/images/pizzabg.png);
-    background-repeat: no-repeat;
-    background-size: cover;
-    box-shadow: inset 0 0 0 2000px rgba(0, 0, 0, 0.30);
     color: white;
-    height: 800px;
+    height: 700px;
     margin: 0;
 }
 
@@ -27,7 +27,7 @@ body {
 }
 
 .game-intro h1 {
-    font-size: 2rem;
+    font-size: 3rem;
     font-weight: 400;
 }
 
@@ -42,6 +42,7 @@ h2 {
     margin-bottom: 35px;
     font-size: 1.2rem;
     font-weight: 600;
+    width: max-content;
 }
 
 p {
@@ -51,7 +52,7 @@ p {
 
 body button {
     font-size: 1.5rem;
-    background-color: #870007;
+    background-color: #048700;
     color: #fff;
     padding: 20px 40px;
     border: 0;
