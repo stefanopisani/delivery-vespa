@@ -7,7 +7,7 @@ class Obstacle {
     }
     draw() {
         const obstacleCar = new Image();
-        obstacleCar.src = '/Users/stefanopisani/Desktop/game/delivery-vespa/images/Topdown_vehicle_sprites_pack/Audi.png';
+        obstacleCar.src = './images/Topdown_vehicle_sprites_pack/Audi.png';
         context.drawImage(obstacleCar, this.x, this.y, this.width, this.height);
     }
 }
@@ -21,7 +21,7 @@ class Obstacle2 {
     }
     draw() {
         const obstacleCar = new Image();
-        obstacleCar.src = '/Users/stefanopisani/Desktop/game/delivery-vespa/images/Topdown_vehicle_sprites_pack/taxi.png';
+        obstacleCar.src = './images/Topdown_vehicle_sprites_pack/taxi.png';
         context.drawImage(obstacleCar, this.x, this.y, this.width, this.height);
     }
 }
@@ -35,7 +35,7 @@ class Obstacle3 {
     }
     draw() {
         const obstacleCar = new Image();
-        obstacleCar.src = '/Users/stefanopisani/Desktop/game/delivery-vespa/images/Topdown_vehicle_sprites_pack/Police.png';
+        obstacleCar.src = './images/Topdown_vehicle_sprites_pack/Police.png';
         context.drawImage(obstacleCar, this.x, this.y, this.width, this.height);
     }
 }
@@ -49,7 +49,7 @@ class Obstacle4 {
     }
     draw() {
         const obstacleCar = new Image();
-        obstacleCar.src = '/Users/stefanopisani/Desktop/game/delivery-vespa/images/Topdown_vehicle_sprites_pack/Black_viper.png';
+        obstacleCar.src = './images/Topdown_vehicle_sprites_pack/Black_viper.png';
         context.drawImage(obstacleCar, this.x, this.y, this.width, this.height);
     }
 }
@@ -63,7 +63,7 @@ class Ambulance {
     }
     draw() {
         const obstacleCar = new Image();
-        obstacleCar.src = '/Users/stefanopisani/Desktop/game/delivery-vespa/images/Topdown_vehicle_sprites_pack/Ambulance.png';
+        obstacleCar.src = './images/Topdown_vehicle_sprites_pack/Ambulance.png';
         context.drawImage(obstacleCar, this.x, this.y, this.width, this.height);
     }
 }
@@ -77,7 +77,7 @@ class Truck {
     }
     draw() {
         const obstacleCar = new Image();
-        obstacleCar.src = '/Users/stefanopisani/Desktop/game/delivery-vespa/images/Topdown_vehicle_sprites_pack/truck.png';
+        obstacleCar.src = './images/Topdown_vehicle_sprites_pack/truck.png';
         context.drawImage(obstacleCar, this.x, this.y, this.width, this.height);
     }
 }

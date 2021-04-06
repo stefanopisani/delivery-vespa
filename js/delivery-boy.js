@@ -2,8 +2,8 @@ class Driver {
     constructor(x, y) {
         this.x = x;
         this.y = y;
-        this.width = 50;
-        this.height = 60;
+        this.width = 75;
+        this.height = 75;
 
         this.speedY = 0;
         this.speedX = 0;
@@ -11,7 +11,7 @@ class Driver {
     }
     draw() {
         const image = new Image();
-        image.src = '/Users/stefanopisani/Desktop/game/delivery-vespa/images/pngegg.png';
+        image.src = './images/bike2.png';
         context.drawImage(image, this.x, this.y, this.width, this.height);
     }
     newPos() {

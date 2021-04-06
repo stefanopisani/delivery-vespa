@@ -8,7 +8,7 @@ class Tram {
 
     draw() {
         const decoration1 = new Image();
-        decoration1.src = '/Users/stefanopisani/Desktop/game/delivery-vespa/images/tram.png';
+        decoration1.src = './images/tram.png';
         context.drawImage(decoration1, this.x, this.y, this.width, this.height);
     }
 }
@@ -23,7 +23,7 @@ class Explosion {
 
     draw() {
         const boom = new Image();
-        boom.src = '/Users/stefanopisani/Desktop/game/delivery-vespa/images/booom.png';
+        boom.src = './images/booom.png';
         context.drawImage(boom, this.x, this.y, 100, 100);
     }
 }

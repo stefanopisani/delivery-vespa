@@ -6,7 +6,10 @@ document.getElementById('game-board').style.display = 'none';
 document.querySelector('.left-side').style.display = 'none';
 document.querySelector('.left-side2').style.display = 'none';
 document.querySelector('.left-side3').style.display = 'none';
+document.querySelector('#game-over1').style.display = 'none';
+document.querySelector('#game-over2').style.display = 'none';
 document.getElementById('win').style.display = 'none';
+document.getElementById('win2').style.display = 'none';
 
 
 document.getElementById('start-button').onclick = () => {
@@ -24,6 +27,7 @@ const boom = new Explosion(250, 350, 200, 200);
 
 let frames = 0;
 let obstacles = [];
+let newObstacles = [];
 let currentLevel = 1;
 
 
@@ -39,7 +43,7 @@ function startGame() {
         document.querySelector('.left-side2').style.display = 'none';
         document.querySelector('.left-side3').style.display = 'block';
     }
-
+    theSound.play();
     player1.draw();
     updateCanvas();
 }
@@ -49,7 +53,7 @@ function updateCanvas() {
     player1.draw();
     player1.moveUp();
     player1.newPos();
-    mySound.play();
+
     frames += 1;
 
     // DECORATIONS:
@@ -68,20 +72,20 @@ function updateCanvas() {
 
 
     // Targets appear
-    if (currentLevel === 1 && frames > 200) {
+    if (currentLevel === 1 && frames > 1200) { //1200
         house1.draw();
     }
 
-    if (currentLevel === 2 && frames > 150) {
+    if (currentLevel === 2 && frames > 1350) { //1350
         house2.draw();
     }
 
-    if (currentLevel === 3 && frames > 200) {
+    if (currentLevel === 3 && frames > 1500) { //1500
         house3.draw();
     }
 
     // MESSAGE 
-    if (frames > 1300 && frames < 1375) {
+    if (currentLevel === 1 && frames > 1300 && frames < 1375) {
         context.font = '45px Arial';
         context.strokeStyle = 'white';
         context.lineWidth = 2;
@@ -93,7 +97,7 @@ function updateCanvas() {
         context.lineWidth = 2;
         context.strokeText('Hurry Up!!!', 300, 70);
     }
-    if (currentLevel === 2 && frames > 1500 && frames < 1575) {
+    if (currentLevel === 3 && frames > 1500 && frames < 1575) {
         context.font = '45px Arial';
         context.strokeStyle = 'white';
         context.lineWidth = 2;
@@ -102,22 +106,34 @@ function updateCanvas() {
 
     // obstacle 1
     if (frames % 190 === 0) {
-        const height = 80;
-        const width = 80;
-        const minX = 50;
-        const maxX = 400;
+        const height = 100;
+        const width = 100;
+        const minX = 250;
+        const maxX = 350;
         const randomX = Math.floor(Math.random() * (maxX - minX + 1) + minX);
         const randomY = 0;
         const newObstacle = new Obstacle(randomX, randomY, width, height);
         obstacles.push(newObstacle);
     }
 
-    // New obstacle - taxi
+    // //test for other direction 
+    // if (frames % 190 === 0) {
+    //     const height = 100;
+    //     const width = 100;
+    //     const minX = 70;
+    //     const maxX = 200;
+    //     const randomX = Math.floor(Math.random() * (maxX - minX + 1) + minX);
+    //     const randomY = 0;
+    //     const newObstacle = new Obstacle(randomX, randomY, width, height);
+    //     newObstacles.push(newObstacle);
+    // }
+
+    // Taxi
     if (frames % 487 === 0) {
-        const height = 80;
-        const width = 80;
-        const minX = 50;
-        const maxX = 400;
+        const height = 100;
+        const width = 100;
+        const minX = 70;
+        const maxX = 350;
         const randomX = Math.floor(Math.random() * (maxX - minX + 1) + minX);
         const randomY = 0;
         const obstacle2 = new Obstacle2(randomX, randomY, width, height);
@@ -126,10 +142,10 @@ function updateCanvas() {
 
     // Police 
     if (frames % 853 === 0) {
-        const height = 80;
-        const width = 80;
-        const minX = 50;
-        const maxX = 400;
+        const height = 100;
+        const width = 100;
+        const minX = 70;
+        const maxX = 350;
         const randomX = Math.floor(Math.random() * (maxX - minX + 1) + minX);
         const randomY = 0;
         const obstacle3 = new Obstacle3(randomX, randomY, width, height);
@@ -138,10 +154,10 @@ function updateCanvas() {
 
     // other car
     if (frames % 251 === 0) {
-        const height = 80;
-        const width = 80;
-        const minX = 50;
-        const maxX = 400;
+        const height = 100;
+        const width = 100;
+        const minX = 70;
+        const maxX = 350;
         const randomX = Math.floor(Math.random() * (maxX - minX + 1) + minX);
         const randomY = 0;
         const obstacle4 = new Obstacle4(randomX, randomY, width, height);
@@ -150,9 +166,9 @@ function updateCanvas() {
 
     // AMBULANCE
     if (currentLevel > 1 && frames % 490 === 0) {
-        const height = 80;
-        const width = 100;
-        const minX = 70;
+        const height = 120;
+        const width = 120;
+        const minX = 250;
         const maxX = 350;
         const randomX = Math.floor(Math.random() * (maxX - minX + 1) + minX);
         const randomY = 0;
@@ -161,10 +177,9 @@ function updateCanvas() {
     }
 
     // TRUCK
-
     if (currentLevel === 3 && frames % 350 === 0) {
-        const height = 100;
-        const width = 120;
+        const height = 150;
+        const width = 150;
         const minX = 70;
         const maxX = 350;
         const randomX = Math.floor(Math.random() * (maxX - minX + 1) + minX);
@@ -186,25 +201,66 @@ function updateCanvas() {
 
         obstacle.draw();
 
-        // detect collision with obstacles
-        function detectCollision(obstacle) {
-            return !((player1.x > (obstacle.x + 25) + (obstacle.width - 50)) ||
-                (player1.x + player1.width < obstacle.x + 25) ||
-                (player1.y > (obstacle.y + 5) + (obstacle.height - 10)) ||
-                (player1.y + player1.height < obstacle.y + 5));
-        }
-        if (detectCollision(obstacle)) {
 
-            // BOOM effect 
-            boom.draw();
-            mySound.stop();
+        if (detectCollision(obstacle)) {
+            theSound.pause();
             gameOver.play();
-            alert('BOOOM! Try again...');
+            document.getElementById('game-board').style.display = 'none';
+            document.querySelector('.left-side').style.display = 'none';
+            document.querySelector('.left-side2').style.display = 'none';
+            document.querySelector('.left-side3').style.display = 'none';
+            document.querySelector('#game-over1').style.display = 'block';
             obstacles = [];
-            location.reload();
+            context.clearRect(0, 0, canvas.width, canvas.height);
+            frames -= 1000;
+            player1.y -= 700;
+
+            document.querySelector('.restart-button').onclick = () => {
+                player1.y = 600;
+                frames = 0;
+                cancelAnimationFrame(animationId);
+                document.querySelector('#game-over1').style.display = 'none';
+                location.reload();
+            };
         }
 
     });
+    // loop into obstacles array - other way 
+    // newObstacles.forEach((obstacle) => {
+    //     if (currentLevel === 1) {
+    //         obstacle.y += 5;
+    //     } else if (currentLevel === 2) {
+    //         obstacle.y += 3;
+    //     } else {
+    //         obstacle.y += 4;
+    //     }
+
+    //     obstacle.draw();
+
+
+    //     if (detectCollision(obstacle)) {
+    //         theSound.pause();
+    //         gameOver.play();
+    //         document.getElementById('game-board').style.display = 'none';
+    //         document.querySelector('.left-side').style.display = 'none';
+    //         document.querySelector('.left-side2').style.display = 'none';
+    //         document.querySelector('.left-side3').style.display = 'none';
+    //         document.querySelector('#game-over1').style.display = 'block';
+    //         obstacles = [];
+    //         context.clearRect(0, 0, canvas.width, canvas.height);
+    //         frames -= 1000;
+    //         player1.y -= 700;
+
+    //         document.querySelector('.restart-button').onclick = () => {
+    //             player1.y = 600;
+    //             frames = 0;
+    //             cancelAnimationFrame(animationId);
+    //             document.querySelector('#game-over1').style.display = 'none';
+    //             location.reload();
+    //         };
+    //     }
+
+    // });
 
 
     // collision with target
@@ -229,26 +285,36 @@ function updateCanvas() {
 
     if (currentLevel === 1) {
         // time's up
-        if (frames > 1750 && !targetReached()) { //**** MUSIC NOT WORKING */
-            mySound.stop();
+        if (frames > 1500 && !targetReached()) {
+            theSound.pause();
             gameOver.play();
-            alert('Too late the pizza is cold! Try again...');
+            document.getElementById('game-board').style.display = 'none';
+            document.querySelector('.left-side').style.display = 'none';
+            document.querySelector('#game-over2').style.display = 'block';
+            // alert('Too late the pizza is cold! Try again...');
             context.clearRect(0, 0, canvas.width, canvas.height);
             obstacles = [];
             frames = 0;
-            location.reload();
+            document.querySelector('.restart-button2').onclick = () => {
 
+                player1.y = 600;
+                frames = 0;
+                cancelAnimationFrame(animationId);
+                document.querySelector('#game-over2').style.display = 'none';
+                location.reload();
+
+            };
         }
         // target reached
-        if (frames > 100 && targetReached()) {
-            mySound.stop();
+        if (frames > 1200 && targetReached()) { //1200
+            theSound.pause();
             winSong.play();
             document.getElementById('game-board').style.display = 'none';
             document.querySelector('.left-side').style.display = 'none';
             document.getElementById('win').style.display = 'block';
             obstacles = [];
             frames--;
-            document.getElementById('restart-button').onclick = () => {
+            document.querySelector('.next-level').onclick = () => {
                 currentLevel = 2;
                 player1.y = 600;
                 frames = 0;
@@ -258,26 +324,35 @@ function updateCanvas() {
         }
     } else if (currentLevel === 2) {
         // time's up
-        if (frames > 1850 && !targetReached()) { //**** MUSIC NOT WORKING */
-            mySound.stop();
+        if (frames > 1750 && !targetReached()) {
+            theSound.pause();
             gameOver.play();
-            alert('Too late the pizza is cold! Try again...');
+            document.getElementById('game-board').style.display = 'none';
+            document.querySelector('.left-side').style.display = 'none';
+            document.querySelector('#game-over2').style.display = 'block';
             context.clearRect(0, 0, canvas.width, canvas.height);
             obstacles = [];
             frames = 0;
-            location.reload();
+            document.querySelector('.restart-button').onclick = () => {
+                player1.y = 600;
+                frames = 0;
+                cancelAnimationFrame(animationId);
+                document.querySelector('#game-over1').style.display = 'none';
+                location.reload();
+            };
+
 
         }
         // target reached
-        if (frames > 150 && targetReached()) {
-            mySound.stop();
+        if (frames > 1350 && targetReached()) { //1350
+            theSound.pause();
             winSong.play();
             document.getElementById('game-board').style.display = 'none';
             document.querySelector('.left-side2').style.display = 'none';
             document.getElementById('win').style.display = 'block';
             obstacles = [];
             frames--;
-            document.getElementById('restart-button').onclick = () => {
+            document.querySelector('.next-level').onclick = () => {
                 currentLevel = 3;
                 player1.y = 600;
                 frames = 0;
@@ -287,34 +362,50 @@ function updateCanvas() {
         }
     } else {
         // time's up
-        if (frames > 1950 && !targetReached()) { //**** MUSIC NOT WORKING */
-            mySound.stop();
+        if (frames > 1900 && !targetReached()) {
             gameOver.play();
-            alert('Too late the pizza is cold! Try again...');
+            document.getElementById('game-board').style.display = 'none';
+            document.querySelector('.left-side').style.display = 'none';
+            document.querySelector('#game-over2').style.display = 'block';
             context.clearRect(0, 0, canvas.width, canvas.height);
             obstacles = [];
             frames = 0;
-            location.reload();
+            document.querySelector('.restart-button').onclick = () => {
+                player1.y = 600;
+                frames = 0;
+                cancelAnimationFrame(animationId);
+                document.querySelector('#game-over1').style.display = 'none';
+                location.reload();
+            };
+
 
         }
         // target reached
-        if (frames > 150 && targetReached()) {
-            mySound.stop();
+        if (frames > 1500 && targetReached()) { //1500
+            theSound.pause();
             winSong.play();
             document.getElementById('game-board').style.display = 'none';
             document.querySelector('.left-side3').style.display = 'none';
-            document.getElementById('win').style.display = 'block';
+            document.getElementById('win2').style.display = 'block';
             obstacles = [];
             frames--;
-            document.getElementById('restart-button').onclick = () => {
+            document.querySelector('.final-button').onclick = () => {
                 currentLevel = 3;
                 player1.y = 600;
                 frames = 0;
                 cancelAnimationFrame(animationId);
-                startGame();
+                location.reload();
             };
         }
     }
 
     animationId = requestAnimationFrame(updateCanvas);
+}
+
+// detect collision with obstacles
+function detectCollision(obstacle) {
+    return !((player1.x > (obstacle.x + 30) + (obstacle.width - 55)) ||
+        (player1.x + player1.width < obstacle.x + 30) ||
+        (player1.y > (obstacle.y + 10) + (obstacle.height - 15)) ||
+        (player1.y + player1.height < obstacle.y + 10));
 }

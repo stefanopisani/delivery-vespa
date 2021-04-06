@@ -7,7 +7,7 @@ class Target {
     }
     draw() {
         const house = new Image();
-        house.src = '/Users/stefanopisani/Desktop/game/delivery-vespa/images/house2.png';
+        house.src = './images/house2.png';
         context.drawImage(house, this.x, this.y, this.width, this.height);
     }
 }
@@ -21,7 +21,7 @@ class Target2 {
     }
     draw() {
         const house2 = new Image();
-        house2.src = '/Users/stefanopisani/Desktop/game/delivery-vespa/images/house1.png';
+        house2.src = './images/house1.png';
         context.drawImage(house2, this.x, this.y, this.width, this.height);
     }
 }
@@ -35,7 +35,7 @@ class Target3 {
     }
     draw() {
         const house2 = new Image();
-        house2.src = '/Users/stefanopisani/Desktop/game/delivery-vespa/images/house3.png';
+        house2.src = './images/house3.png';
         context.drawImage(house2, this.x, this.y, this.width, this.height);
     }
 }
