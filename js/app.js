@@ -20,9 +20,9 @@ const player1 = new Driver(200, 650);
 const house1 = new Target(120, 0, 150, 150);
 const house2 = new Target2(230, 0, 150, 150);
 const house3 = new Target3(50, 0, 120, 120);
-const tram = new Tram(380, 0, 120, 150);
-const tram2 = new Tram(380, 0, 120, 150);
-const tram3 = new Tram(0, 0, 120, 150);
+const tram = new Tram(395, 0, 120, 150);
+const tram2 = new Tram(395, 0, 120, 150);
+const tram3 = new Tram(-15, 0, 120, 150);
 const boom = new Explosion(250, 350, 200, 200);
 
 let frames = 0;
@@ -30,6 +30,17 @@ let obstacles = [];
 let newObstacles = [];
 let currentLevel = 1;
 
+
+// END GAME
+function endGame() {
+    context.clearRect(0, 0, canvas.width, canvas.height);
+    frames = 0;
+    player1.y -= 600;
+    obstacles.y = 0;
+    obstacles = [];
+    cancelAnimationFrame(animationId);
+}
+// ---------
 
 function startGame() {
     document.querySelector('.game-intro').style.display = 'none';
@@ -70,17 +81,16 @@ function updateCanvas() {
         tram2.y += 1;
     }
 
-
     // Targets appear
-    if (currentLevel === 1 && frames > 1200) { //1200
+    if (currentLevel === 1 && frames > 200) { //1200
         house1.draw();
     }
 
-    if (currentLevel === 2 && frames > 1350) { //1350
+    if (currentLevel === 2 && frames > 150) { //1350
         house2.draw();
     }
 
-    if (currentLevel === 3 && frames > 1500) { //1500
+    if (currentLevel === 3 && frames > 150) { //1500
         house3.draw();
     }
 
@@ -108,7 +118,7 @@ function updateCanvas() {
     if (frames % 190 === 0) {
         const height = 100;
         const width = 100;
-        const minX = 250;
+        const minX = 70;
         const maxX = 350;
         const randomX = Math.floor(Math.random() * (maxX - minX + 1) + minX);
         const randomY = 0;
@@ -210,10 +220,7 @@ function updateCanvas() {
             document.querySelector('.left-side2').style.display = 'none';
             document.querySelector('.left-side3').style.display = 'none';
             document.querySelector('#game-over1').style.display = 'block';
-            obstacles = [];
-            context.clearRect(0, 0, canvas.width, canvas.height);
-            frames -= 1000;
-            player1.y -= 700;
+            endGame();
 
             document.querySelector('.restart-button').onclick = () => {
                 player1.y = 600;
@@ -225,45 +232,8 @@ function updateCanvas() {
         }
 
     });
-    // loop into obstacles array - other way 
-    // newObstacles.forEach((obstacle) => {
-    //     if (currentLevel === 1) {
-    //         obstacle.y += 5;
-    //     } else if (currentLevel === 2) {
-    //         obstacle.y += 3;
-    //     } else {
-    //         obstacle.y += 4;
-    //     }
 
-    //     obstacle.draw();
-
-
-    //     if (detectCollision(obstacle)) {
-    //         theSound.pause();
-    //         gameOver.play();
-    //         document.getElementById('game-board').style.display = 'none';
-    //         document.querySelector('.left-side').style.display = 'none';
-    //         document.querySelector('.left-side2').style.display = 'none';
-    //         document.querySelector('.left-side3').style.display = 'none';
-    //         document.querySelector('#game-over1').style.display = 'block';
-    //         obstacles = [];
-    //         context.clearRect(0, 0, canvas.width, canvas.height);
-    //         frames -= 1000;
-    //         player1.y -= 700;
-
-    //         document.querySelector('.restart-button').onclick = () => {
-    //             player1.y = 600;
-    //             frames = 0;
-    //             cancelAnimationFrame(animationId);
-    //             document.querySelector('#game-over1').style.display = 'none';
-    //             location.reload();
-    //         };
-    //     }
-
-    // });
-
-
-    // collision with target
+    // COLLISION WITH TARGET
     function targetReached() {
         if (currentLevel === 1) {
             return !((player1.x > house1.x + house1.width) ||
@@ -291,29 +261,22 @@ function updateCanvas() {
             document.getElementById('game-board').style.display = 'none';
             document.querySelector('.left-side').style.display = 'none';
             document.querySelector('#game-over2').style.display = 'block';
-            // alert('Too late the pizza is cold! Try again...');
-            context.clearRect(0, 0, canvas.width, canvas.height);
-            obstacles = [];
-            frames = 0;
-            document.querySelector('.restart-button2').onclick = () => {
+            endGame();
 
-                player1.y = 600;
-                frames = 0;
+            document.querySelector('.restart-button2').onclick = () => {
                 cancelAnimationFrame(animationId);
                 document.querySelector('#game-over2').style.display = 'none';
                 location.reload();
-
             };
         }
         // target reached
-        if (frames > 1200 && targetReached()) { //1200
+        if (frames > 150 && targetReached()) { //1200
             theSound.pause();
             winSong.play();
             document.getElementById('game-board').style.display = 'none';
             document.querySelector('.left-side').style.display = 'none';
             document.getElementById('win').style.display = 'block';
-            obstacles = [];
-            frames--;
+            endGame();
             document.querySelector('.next-level').onclick = () => {
                 currentLevel = 2;
                 player1.y = 600;
@@ -328,30 +291,27 @@ function updateCanvas() {
             theSound.pause();
             gameOver.play();
             document.getElementById('game-board').style.display = 'none';
-            document.querySelector('.left-side').style.display = 'none';
+            document.querySelector('.left-side2').style.display = 'none';
             document.querySelector('#game-over2').style.display = 'block';
-            context.clearRect(0, 0, canvas.width, canvas.height);
-            obstacles = [];
-            frames = 0;
-            document.querySelector('.restart-button').onclick = () => {
+            endGame();
+            document.querySelector('.restart-button2').onclick = () => {
                 player1.y = 600;
                 frames = 0;
                 cancelAnimationFrame(animationId);
-                document.querySelector('#game-over1').style.display = 'none';
+                document.querySelector('#game-over2').style.display = 'none';
                 location.reload();
             };
 
 
         }
         // target reached
-        if (frames > 1350 && targetReached()) { //1350
+        if (frames > 100 && targetReached()) { //1350
             theSound.pause();
             winSong.play();
             document.getElementById('game-board').style.display = 'none';
             document.querySelector('.left-side2').style.display = 'none';
             document.getElementById('win').style.display = 'block';
-            obstacles = [];
-            frames--;
+            endGame();
             document.querySelector('.next-level').onclick = () => {
                 currentLevel = 3;
                 player1.y = 600;
@@ -365,30 +325,27 @@ function updateCanvas() {
         if (frames > 1900 && !targetReached()) {
             gameOver.play();
             document.getElementById('game-board').style.display = 'none';
-            document.querySelector('.left-side').style.display = 'none';
+            document.querySelector('.left-side3').style.display = 'none';
             document.querySelector('#game-over2').style.display = 'block';
-            context.clearRect(0, 0, canvas.width, canvas.height);
-            obstacles = [];
-            frames = 0;
-            document.querySelector('.restart-button').onclick = () => {
+            endGame();
+            document.querySelector('.restart-button2').onclick = () => {
                 player1.y = 600;
                 frames = 0;
                 cancelAnimationFrame(animationId);
-                document.querySelector('#game-over1').style.display = 'none';
+                document.querySelector('#game-over2').style.display = 'none';
                 location.reload();
             };
 
 
         }
         // target reached
-        if (frames > 1500 && targetReached()) { //1500
+        if (frames > 150 && targetReached()) { //1500
             theSound.pause();
             winSong.play();
             document.getElementById('game-board').style.display = 'none';
             document.querySelector('.left-side3').style.display = 'none';
             document.getElementById('win2').style.display = 'block';
-            obstacles = [];
-            frames--;
+            endGame();
             document.querySelector('.final-button').onclick = () => {
                 currentLevel = 3;
                 player1.y = 600;
@@ -398,8 +355,8 @@ function updateCanvas() {
             };
         }
     }
-
     animationId = requestAnimationFrame(updateCanvas);
+
 }
 
 // detect collision with obstacles
@@ -409,3 +366,41 @@ function detectCollision(obstacle) {
         (player1.y > (obstacle.y + 10) + (obstacle.height - 15)) ||
         (player1.y + player1.height < obstacle.y + 10));
 }
+
+
+// loop into obstacles array - other way 
+// newObstacles.forEach((obstacle) => {
+//     if (currentLevel === 1) {
+//         obstacle.y += 5;
+//     } else if (currentLevel === 2) {
+//         obstacle.y += 3;
+//     } else {
+//         obstacle.y += 4;
+//     }
+
+//     obstacle.draw();
+
+
+//     if (detectCollision(obstacle)) {
+//         theSound.pause();
+//         gameOver.play();
+//         document.getElementById('game-board').style.display = 'none';
+//         document.querySelector('.left-side').style.display = 'none';
+//         document.querySelector('.left-side2').style.display = 'none';
+//         document.querySelector('.left-side3').style.display = 'none';
+//         document.querySelector('#game-over1').style.display = 'block';
+//         obstacles = [];
+//         context.clearRect(0, 0, canvas.width, canvas.height);
+//         frames -= 1000;
+//         player1.y -= 700;
+
+//         document.querySelector('.restart-button').onclick = () => {
+//             player1.y = 600;
+//             frames = 0;
+//             cancelAnimationFrame(animationId);
+//             document.querySelector('#game-over1').style.display = 'none';
+//             location.reload();
+//         };
+//     }
+
+// });

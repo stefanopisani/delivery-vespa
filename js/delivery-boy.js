@@ -13,6 +13,8 @@ class Driver {
         const image = new Image();
         image.src = './images/bike2.png';
         context.drawImage(image, this.x, this.y, this.width, this.height);
+        // context.strokeStyle = 'white';
+        // context.strokeRect(this.x - 10, this.y, this.width, this.height);
     }
     newPos() {
         if (player1.x > 40) {
@@ -20,10 +22,10 @@ class Driver {
         } else {
             player1.x = 40.1;
         }
-        if (player1.x < 420) {
+        if (player1.x < 400) {
             this.x += this.speedX;
         } else {
-            player1.x = 419.9;
+            player1.x = 399.9;
         }
         if (player1.y > 10) {
             this.y += this.speedY;

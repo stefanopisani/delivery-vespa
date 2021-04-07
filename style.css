@@ -15,6 +15,7 @@ body {
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
+    align-content: center;
     color: white;
     height: 700px;
     margin: 0;
@@ -26,7 +27,7 @@ body {
     font-family: 'Press Start 2P';
 }
 
-.game-intro h1 {
+.main h1 {
     font-size: 3rem;
     font-weight: 400;
 }
@@ -37,12 +38,24 @@ h2 {
     font-weight: 500;
 }
 
+/* .vespa-intro {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+} */
+
 .game-intro p {
-    margin-top: -20px;
-    margin-bottom: 35px;
+    /* margin-top: -20px; */
+    margin: 30px 50px;
     font-size: 1.2rem;
     font-weight: 600;
     width: max-content;
+}
+
+.game-intro div {
+    /* margin-top: -20px; */
+    margin: 30px 50px;
 }
 
 p {
@@ -70,9 +83,10 @@ body button {
     line-height: 100px;
     width: 90px;
     height: 90px;
-    animation: impenna;
-    animation-duration: 1s;
-    animation-iteration-count: 2;
+    transform: rotate(30deg);
+    animation: shake;
+    animation-duration: 0.3s;
+    animation-iteration-count: 5;
     animation-timing-function: linear;
 }
 
@@ -92,6 +106,11 @@ body button {
     animation-duration: 0.3s;
     animation-iteration-count: 5;
     animation-timing-function: linear;
+}
+
+#win h1 {
+    font-size: 2rem;
+    margin-bottom: 40px;
 }
 
 @keyframes rotate {
