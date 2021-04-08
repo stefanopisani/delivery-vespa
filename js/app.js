@@ -118,7 +118,7 @@ function updateCanvas() {
         context.font = '45px Arial';
         context.strokeStyle = 'white';
         context.lineWidth = 2;
-        context.strokeText('Hurry Up!!!', 300, 70);
+        context.strokeText('Hurry Up!!!', 50, 70);
     }
     if (currentLevel === 3 && frames > 1500 && frames < 1575) {
         context.font = '45px Arial';
@@ -128,7 +128,7 @@ function updateCanvas() {
     }
 
     // obstacle 1
-    if (frames % 190 === 0) {
+    if (frames % 210 === 0) {
         const height = 100;
         const width = 100;
         const minX = 70;
@@ -140,7 +140,7 @@ function updateCanvas() {
     }
 
     // Taxi
-    if (frames % 455 === 0) {
+    if (frames % 575 === 0) {
         const height = 100;
         const width = 100;
         const minX = 70;
@@ -152,7 +152,7 @@ function updateCanvas() {
     }
 
     // Police 
-    if (frames % 850 === 0) {
+    if (frames % 950 === 0) {
         const height = 100;
         const width = 100;
         const minX = 70;
@@ -164,7 +164,7 @@ function updateCanvas() {
     }
 
     // other car
-    if (frames % 270 === 0) {
+    if (frames % 310 === 0) {
         const height = 100;
         const width = 100;
         const minX = 70;
@@ -189,7 +189,7 @@ function updateCanvas() {
     }
 
     // TRUCK
-    if (currentLevel === 3 && frames % 350 === 0) {
+    if (currentLevel === 3 && frames % 430 === 0) {
         const height = 150;
         const width = 150;
         const minX = 70;
@@ -265,6 +265,7 @@ function updateCanvas() {
             stopGame();
             document.querySelector('.next-level').onclick = () => {
                 currentLevel = 2;
+                player1.x = 250;
                 player1.y = 600;
                 frames = 0;
                 cancelAnimationFrame(animationId);
@@ -281,8 +282,6 @@ function updateCanvas() {
             document.querySelector('#game-over2').style.display = 'block';
             stopGame();
             document.querySelector('.restart-button2').onclick = () => {
-                player1.y = 600;
-                frames = 0;
                 cancelAnimationFrame(animationId);
                 document.querySelector('#game-over2').style.display = 'none';
                 location.reload();
@@ -298,6 +297,7 @@ function updateCanvas() {
             stopGame();
             document.querySelector('.next-level').onclick = () => {
                 currentLevel = 3;
+                player1.x = 250;
                 player1.y = 600;
                 frames = 0;
                 cancelAnimationFrame(animationId);
@@ -313,8 +313,6 @@ function updateCanvas() {
             document.querySelector('#game-over2').style.display = 'block';
             stopGame();
             document.querySelector('.restart-button2').onclick = () => {
-                player1.y = 600;
-                frames = 0;
                 cancelAnimationFrame(animationId);
                 document.querySelector('#game-over2').style.display = 'none';
                 location.reload();
@@ -329,9 +327,6 @@ function updateCanvas() {
             document.getElementById('win2').style.display = 'block';
             stopGame();
             document.querySelector('.final-button').onclick = () => {
-                currentLevel = 3;
-                player1.y = 600;
-                frames = 0;
                 cancelAnimationFrame(animationId);
                 location.reload();
             };
@@ -343,13 +338,13 @@ function updateCanvas() {
 }
 
 // COLLISIONS:
-
+// (this.x, this.y + 5, this.width, this.height - 15);
 // OBSTACLES
 function detectCollision(obstacle) {
     return !((player1.x > (obstacle.x + 30) + (obstacle.width - 55)) ||
         (player1.x + player1.width < obstacle.x + 30) ||
-        (player1.y > (obstacle.y + 10) + (obstacle.height - 15)) ||
-        (player1.y + player1.height < obstacle.y + 10));
+        ((player1.y + 5) > (obstacle.y + 10) + (obstacle.height - 15)) ||
+        ((player1.y + 5) + (player1.height - 15) < obstacle.y + 10));
 }
 
 // TARGET

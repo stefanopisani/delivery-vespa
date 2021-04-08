@@ -2,8 +2,8 @@ class Driver {
     constructor(x, y) {
         this.x = x;
         this.y = y;
-        this.width = 75;
-        this.height = 75;
+        this.width = 60;
+        this.height = 60;
 
         this.speedY = 0;
         this.speedX = 0;
@@ -14,7 +14,7 @@ class Driver {
         image.src = './images/bike2.png';
         context.drawImage(image, this.x, this.y, this.width, this.height);
         // context.strokeStyle = 'white';
-        // context.strokeRect(this.x - 10, this.y, this.width, this.height);
+        // context.strokeRect(this.x, this.y + 5, this.width, this.height - 15);
     }
     newPos() {
         if (player1.x > 40) {
@@ -32,17 +32,17 @@ class Driver {
         } else {
             player1.y = 5.1;
         }
-        if (player1.y < 550) {
+        if (player1.y < 650) {
             this.y += this.speedY;
         } else {
-            player1.y = 550.1;
+            player1.y = 650.1;
         }
 
 
         this.y += this.speedY;
     }
     moveUp() {
-        this.y -= 0.3;
+        this.y -= 0.2;
     }
     accelerate() {
         this.speedY -= 1;
@@ -67,7 +67,7 @@ document.addEventListener('keydown', (e) => {
             }
             break;
         case 40:
-            if (player1.y < 550) {
+            if (player1.y < 650) {
                 player1.break();
             }
             break;

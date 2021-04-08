@@ -122,6 +122,12 @@ body button:hover {
     animation-timing-function: linear;
 }
 
+#cold {
+    width: 80px;
+    height: 80px;
+    animation: bounce 0.5s 3 linear;
+}
+
 .icons {
     width: 80px;
     height: 80px;
@@ -138,12 +144,12 @@ body button:hover {
 
 #win2 h1 {
     font-size: 2.5rem;
-    animation: blinker 0.8s linear infinite;
+    animation: blinker 1s 5 linear;
 }
 
 
 #win h2 {
-    animation: blinker 0.8s linear infinite;
+    animation: blinker 1s 3 linear;
 }
 
 .left h1 {
