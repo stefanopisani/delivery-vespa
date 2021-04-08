@@ -58,6 +58,9 @@ function stopGame() {
     context.clearRect(0, 0, canvas.width, canvas.height);
     frames = 0;
     player1.y += 600;
+    tram.y = 0;
+    tram2.y = 0;
+    tram3.y = 0;
     obstacles = [];
     endGame = true;
     cancelAnimationFrame(animationId);
@@ -79,7 +82,6 @@ function updateCanvas() {
     player1.draw();
     player1.moveUp();
     player1.newPos();
-
     frames += 1;
 
     // DECORATIONS:
