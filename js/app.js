@@ -377,6 +377,7 @@ function targetReached() {
     }
 }
 
+console.log(theSound.volume);
 
 // function getRandomObstacleX(minX, maxX) {
 //     let randomX = Math.floor(Math.random() * (maxX - minX + 1) + minX);
