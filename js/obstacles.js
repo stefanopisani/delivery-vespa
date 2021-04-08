@@ -81,3 +81,17 @@ class Truck {
         context.drawImage(obstacleCar, this.x, this.y, this.width, this.height);
     }
 }
+
+class Minivan {
+    constructor(x, y, width, height) {
+        this.x = x;
+        this.y = y;
+        this.width = width;
+        this.height = height;
+    }
+    draw() {
+        const obstacleCar = new Image();
+        obstacleCar.src = './images/Topdown_vehicle_sprites_pack/Mini_van.png';
+        context.drawImage(obstacleCar, this.x, this.y, this.width, this.height);
+    }
+}

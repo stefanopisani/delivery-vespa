@@ -128,7 +128,7 @@ function updateCanvas() {
     }
 
     // obstacle 1
-    if (frames % 210 === 0) {
+    if (frames % 210 === 0 && frames !== 630 && frames !== 1260) {
         const height = 100;
         const width = 100;
         const minX = 70;
@@ -155,22 +155,32 @@ function updateCanvas() {
     if (frames % 950 === 0) {
         const height = 100;
         const width = 100;
-        const minX = 70;
-        const maxX = 350;
+        const minX = 50;
+        const maxX = 70;
         const randomX = Math.floor(Math.random() * (maxX - minX + 1) + minX);
         const randomY = 0;
         const obstacle3 = new Obstacle3(randomX, randomY, width, height);
         obstacles.push(obstacle3);
     }
 
-    // other car
-    if (frames % 310 === 0) {
+    // mini-van
+    if (frames === 130 || frames === 710 || frames === 900 || frames === 1300) {
         const height = 100;
         const width = 100;
         const minX = 70;
         const maxX = 350;
         const randomX = Math.floor(Math.random() * (maxX - minX + 1) + minX);
-        // const randomX = getRandomObstacleX();
+        const randomY = 0;
+        const miniVan = new Minivan(randomX, randomY, width, height);
+        obstacles.push(miniVan);
+    }
+    // other car
+    if (frames % 310 === 0 && frames !== 930) {
+        const height = 100;
+        const width = 100;
+        const minX = 70;
+        const maxX = 350;
+        const randomX = Math.floor(Math.random() * (maxX - minX + 1) + minX);
         const randomY = 0;
         const obstacle4 = new Obstacle4(randomX, randomY, width, height);
         obstacles.push(obstacle4);
@@ -180,7 +190,7 @@ function updateCanvas() {
     if (currentLevel > 1 && frames % 500 === 0) {
         const height = 120;
         const width = 120;
-        const minX = 250;
+        const minX = 320;
         const maxX = 350;
         const randomX = Math.floor(Math.random() * (maxX - minX + 1) + minX);
         const randomY = 0;
@@ -189,7 +199,7 @@ function updateCanvas() {
     }
 
     // TRUCK
-    if (currentLevel === 3 && frames % 430 === 0) {
+    if (currentLevel === 3 && frames % 400 === 0) {
         const height = 150;
         const width = 150;
         const minX = 70;
