@@ -108,7 +108,7 @@ function updateCanvas() {
     }
 
     // MESSAGE 
-    if (currentLevel === 1 && frames > 1300 && frames < 1325 || frames > 1350 && frames < 1400) {
+    if (currentLevel === 1 && frames > 1300 && frames < 1325) {
         context.font = '45px Arial';
         context.strokeStyle = 'white';
         context.lineWidth = 2;
@@ -265,7 +265,7 @@ function updateCanvas() {
             stopGame();
             document.querySelector('.next-level').onclick = () => {
                 currentLevel = 2;
-                player1.x = 250;
+                player1.x = 230;
                 player1.y = 600;
                 frames = 0;
                 cancelAnimationFrame(animationId);
@@ -297,7 +297,7 @@ function updateCanvas() {
             stopGame();
             document.querySelector('.next-level').onclick = () => {
                 currentLevel = 3;
-                player1.x = 250;
+                player1.x = 230;
                 player1.y = 600;
                 frames = 0;
                 cancelAnimationFrame(animationId);
