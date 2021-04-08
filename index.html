@@ -13,7 +13,7 @@
 
     <section class="main">
         <div class="game-intro">
-            <h1> PIZZA DELIVERY <img src="./images/bike2.png" alt="vespa" id="vespa"> </h1>
+            <h1> PIZZA DELIVERY <img src="./images/bike2.png" alt="vespa" id="vespa" class="first-vespa"> </h1>
             <h2> Deliver the pizza on time <br> and be careful on the road! </h2>
             <!-- <p> Use the arrows to control the Vespa </p>
             <div class="vespa-intro">  
@@ -30,12 +30,12 @@
 
         </div>
 
-        <div class="left-side">
+        <div class="left-side left">
             <h1> LEVEL 1 </h1>
 
             <h2> Reach the house <br> as soon as it appears</h2>
             <div>
-                <img src="./images/house2.png" alt="casa" class="house">
+                <img src="./images/house2.png" alt="casa" class="house house-level">
             </div>
             <h2> Be fast and <br> Avoid the Traffic!! </h2>
             <div>
@@ -46,37 +46,37 @@
 
         </div>
 
-        <div class="left-side2">
+        <div class="left-side2 left">
             <h1> LEVEL 2 </h1>
 
             <h2> New house to reach </h2>
             <div>
-                <img src="./images/house1.png" alt="casa" class="house">
+                <img src="./images/house1.png" alt="casa" class="house house-level">
             </div>
             <h2> The traffic increased <br> Be careful!!! </h2>
             <div>
-                <img src="./images/Topdown_vehicle_sprites_pack/Ambulance.png" alt="vespa" class="icons">
-                <img src="./images/Topdown_vehicle_sprites_pack/Black_viper.png" alt="vespa" class="icons">
-                <img src="./images/Topdown_vehicle_sprites_pack/taxi.png" alt="vespa" class="icons">
-                <img src="./images/Topdown_vehicle_sprites_pack/Audi.png" alt="vespa" class="icons">
+                <img src="./images/Topdown_vehicle_sprites_pack/Ambulance.png" alt="vehicle" class="icons">
+                <img src="./images/Topdown_vehicle_sprites_pack/Black_viper.png" alt="vehicle" class="icons">
+                <img src="./images/Topdown_vehicle_sprites_pack/taxi.png" alt="vehicle" class="icons">
+                <img src="./images/Topdown_vehicle_sprites_pack/Audi.png" alt="vehicle" class="icons">
             </div>
 
         </div>
 
-        <div class="left-side3">
+        <div class="left-side3 left">
             <h1> LEVEL 3 </h1>
 
             <h2> Last one <br> for tonight </h2>
             <div>
-                <img src="./images/house3.png" alt="casa" class="house">
+                <img src="./images/house3.png" alt="house" class="house house-level">
             </div>
             <h2> The Road is very busy <br> Watch out!! </h2>
             <div>
-                <img src="./images/Topdown_vehicle_sprites_pack/truck.png" alt="vespa" class="icons">
-                <img src="./images/Topdown_vehicle_sprites_pack/Audi.png" alt="vespa" class="icons">
-                <img src="./images/Topdown_vehicle_sprites_pack/Black_viper.png" alt="vespa" class="icons">
-                <img src="./images/Topdown_vehicle_sprites_pack/Ambulance.png" alt="vespa" class="icons">
-                <img src="./images/Topdown_vehicle_sprites_pack/taxi.png" alt="vespa" class="icons">
+                <img src="./images/Topdown_vehicle_sprites_pack/truck.png" alt="vehicle" class="icons">
+                <img src="./images/Topdown_vehicle_sprites_pack/Audi.png" alt="vehicle" class="icons">
+                <img src="./images/Topdown_vehicle_sprites_pack/Black_viper.png" alt="vehicle" class="icons">
+                <img src="./images/Topdown_vehicle_sprites_pack/Ambulance.png" alt="vehicle" class="icons">
+                <img src="./images/Topdown_vehicle_sprites_pack/taxi.png" alt="vehicle" class="icons">
             </div>
 
         </div>
@@ -88,9 +88,9 @@
 
         <div id="game-over1">
 
-            <img src="./images/booom.png" alt="boom" id="boom">
-            <img src="./images/booom.png" alt="boom" id="boom">
-            <img src="./images/booom.png" alt="boom" id="boom">
+            <img src="./images/booom.png" alt="explosion" id="boom">
+            <img src="./images/booom.png" alt="explosion" id="boom">
+            <img src="./images/booom.png" alt="explosion" id="boom">
             <h1> BOOM!! </h1>
             <h2> You crashed on a car </h2>
 
@@ -100,9 +100,9 @@
             </p> -->
         </div>
         <div id="game-over2">
-            <img src="./images/cold.png" alt="boom" id="boom">
-            <img src="./images/cold.png" alt="boom" id="boom">
-            <img src="./images/cold.png" alt="boom" id="boom">
+            <img src="./images/cold.png" alt="cold" id="boom">
+            <img src="./images/cold.png" alt="cold" id="boom">
+            <img src="./images/cold.png" alt="cold" id="boom">
             <h1> TOO LATE!! </h1>
             <h2> Nobody wants a cold Pizza </h2>
 
@@ -115,13 +115,14 @@
         <div id="win">
             <h1> Right on Time!! </h1>
             <button class="next-level"> Next Level </button>
-            <h2> New delivery, hurry up! <img src="./images/bike2.png" alt="vespa" id="vespa"> </h2>
+            <h2> New delivery, hurry up! <img src="./images/bike2.png" alt="vespa" id="vespa" class="second-vespa">
+            </h2>
         </div>
 
         <div id="win2">
-            <img src="./images/bike2.png" alt="vespa" id="vespa">
-            <img src="./images/bike2.png" alt="vespa" id="vespa">
-            <img src="./images/bike2.png" alt="vespa" id="vespa"> <br>
+            <img src="./images/bike2.png" alt="vespa" id="vespa" class="last-vespa">
+            <img src="./images/bike2.png" alt="vespa" id="vespa" class="last-vespa">
+            <img src="./images/bike2.png" alt="vespa" id="vespa" class="last-vespa"> <br>
             <h1> DELIVERIES COMPLETED!!!! </h1>
             <button class="final-button"> Start Again </button>
 

@@ -1,6 +1,8 @@
 const canvas = document.querySelector('#canvas');
 const context = canvas.getContext('2d');
 let animationId;
+let endGame = false;
+let levelPassed = false;
 
 document.getElementById('game-board').style.display = 'none';
 document.querySelector('.left-side').style.display = 'none';
@@ -16,10 +18,11 @@ document.getElementById('start-button').onclick = () => {
     startGame();
 };
 
+// PLAYERS 
 const player1 = new Driver(200, 650);
-const house1 = new Target(120, 0, 150, 150);
-const house2 = new Target2(230, 0, 150, 150);
-const house3 = new Target3(50, 0, 120, 120);
+const house1 = new Target(20, 0, 150, 150);
+const house2 = new Target2(330, 0, 150, 150);
+const house3 = new Target3(10, 0, 120, 120);
 const tram = new Tram(395, 0, 120, 150);
 const tram2 = new Tram(395, 0, 120, 150);
 const tram3 = new Tram(-15, 0, 120, 150);
@@ -30,18 +33,7 @@ let obstacles = [];
 let newObstacles = [];
 let currentLevel = 1;
 
-
-// END GAME
-function endGame() {
-    context.clearRect(0, 0, canvas.width, canvas.height);
-    frames = 0;
-    player1.y -= 600;
-    obstacles.y = 0;
-    obstacles = [];
-    cancelAnimationFrame(animationId);
-}
-// ---------
-
+// START GAME
 function startGame() {
     document.querySelector('.game-intro').style.display = 'none';
     document.getElementById('win').style.display = 'none';
@@ -54,11 +46,34 @@ function startGame() {
         document.querySelector('.left-side2').style.display = 'none';
         document.querySelector('.left-side3').style.display = 'block';
     }
+    endGame = false;
     theSound.play();
     player1.draw();
     updateCanvas();
 }
 
+
+// END GAME
+function stopGame() {
+    context.clearRect(0, 0, canvas.width, canvas.height);
+    frames = 0;
+    player1.y += 600;
+    obstacles = [];
+    endGame = true;
+    cancelAnimationFrame(animationId);
+}
+
+// // stop for win
+// function nextLevel() {
+//     context.clearRect(0, 0, canvas.width, canvas.height);
+//     frames = 0;
+//     player1.y += 600;
+//     obstacles = [];
+//     levelPassed = true;
+//     cancelAnimationFrame(animationId);
+// }
+
+// UPDATE CANVAS 
 function updateCanvas() {
     context.clearRect(0, 0, canvas.width, canvas.height);
     player1.draw();
@@ -81,21 +96,19 @@ function updateCanvas() {
         tram2.y += 1;
     }
 
-    // Targets appear
-    if (currentLevel === 1 && frames > 200) { //1200
+    // TARGETS APPEAR
+    if (currentLevel === 1 && frames > 1200) { //1200
         house1.draw();
     }
-
-    if (currentLevel === 2 && frames > 150) { //1350
+    if (currentLevel === 2 && frames > 1350) { //1350
         house2.draw();
     }
-
-    if (currentLevel === 3 && frames > 150) { //1500
+    if (currentLevel === 3 && frames > 1500) { //1500
         house3.draw();
     }
 
     // MESSAGE 
-    if (currentLevel === 1 && frames > 1300 && frames < 1375) {
+    if (currentLevel === 1 && frames > 1300 && frames < 1325 || frames > 1350 && frames < 1400) {
         context.font = '45px Arial';
         context.strokeStyle = 'white';
         context.lineWidth = 2;
@@ -126,20 +139,8 @@ function updateCanvas() {
         obstacles.push(newObstacle);
     }
 
-    // //test for other direction 
-    // if (frames % 190 === 0) {
-    //     const height = 100;
-    //     const width = 100;
-    //     const minX = 70;
-    //     const maxX = 200;
-    //     const randomX = Math.floor(Math.random() * (maxX - minX + 1) + minX);
-    //     const randomY = 0;
-    //     const newObstacle = new Obstacle(randomX, randomY, width, height);
-    //     newObstacles.push(newObstacle);
-    // }
-
     // Taxi
-    if (frames % 487 === 0) {
+    if (frames % 455 === 0) {
         const height = 100;
         const width = 100;
         const minX = 70;
@@ -151,7 +152,7 @@ function updateCanvas() {
     }
 
     // Police 
-    if (frames % 853 === 0) {
+    if (frames % 850 === 0) {
         const height = 100;
         const width = 100;
         const minX = 70;
@@ -163,19 +164,20 @@ function updateCanvas() {
     }
 
     // other car
-    if (frames % 251 === 0) {
+    if (frames % 270 === 0) {
         const height = 100;
         const width = 100;
         const minX = 70;
         const maxX = 350;
         const randomX = Math.floor(Math.random() * (maxX - minX + 1) + minX);
+        // const randomX = getRandomObstacleX();
         const randomY = 0;
         const obstacle4 = new Obstacle4(randomX, randomY, width, height);
         obstacles.push(obstacle4);
     }
 
     // AMBULANCE
-    if (currentLevel > 1 && frames % 490 === 0) {
+    if (currentLevel > 1 && frames % 500 === 0) {
         const height = 120;
         const width = 120;
         const minX = 250;
@@ -199,8 +201,8 @@ function updateCanvas() {
     }
 
 
-    // loop into obstacles array
-    obstacles.forEach((obstacle) => {
+    // LOOP into OBSTACLES array
+    obstacles.forEach((obstacle, index) => {
         if (currentLevel === 1) {
             obstacle.y += 2;
         } else if (currentLevel === 2) {
@@ -211,7 +213,6 @@ function updateCanvas() {
 
         obstacle.draw();
 
-
         if (detectCollision(obstacle)) {
             theSound.pause();
             gameOver.play();
@@ -220,7 +221,7 @@ function updateCanvas() {
             document.querySelector('.left-side2').style.display = 'none';
             document.querySelector('.left-side3').style.display = 'none';
             document.querySelector('#game-over1').style.display = 'block';
-            endGame();
+            stopGame();
 
             document.querySelector('.restart-button').onclick = () => {
                 player1.y = 600;
@@ -231,27 +232,12 @@ function updateCanvas() {
             };
         }
 
+        if (obstacle.y > 700) {
+            obstacles.splice(index, 1);
+            //remove from the randomXs array
+        }
     });
 
-    // COLLISION WITH TARGET
-    function targetReached() {
-        if (currentLevel === 1) {
-            return !((player1.x > house1.x + house1.width) ||
-                (player1.x + player1.width < house1.x) ||
-                (player1.y > house1.y + house1.height) ||
-                (player1.y + player1.height < house1.y));
-        } else if (currentLevel === 2) {
-            return !((player1.x > house2.x + house2.width) ||
-                (player1.x + player1.width < house2.x) ||
-                (player1.y > house2.y + house2.height) ||
-                (player1.y + player1.height < house2.y));
-        } else {
-            return !((player1.x > house3.x + house3.width) ||
-                (player1.x + player1.width < house3.x) ||
-                (player1.y > house3.y + house3.height) ||
-                (player1.y + player1.height < house3.y));
-        }
-    }
 
     if (currentLevel === 1) {
         // time's up
@@ -261,7 +247,7 @@ function updateCanvas() {
             document.getElementById('game-board').style.display = 'none';
             document.querySelector('.left-side').style.display = 'none';
             document.querySelector('#game-over2').style.display = 'block';
-            endGame();
+            stopGame();
 
             document.querySelector('.restart-button2').onclick = () => {
                 cancelAnimationFrame(animationId);
@@ -270,13 +256,13 @@ function updateCanvas() {
             };
         }
         // target reached
-        if (frames > 150 && targetReached()) { //1200
+        if (frames > 1250 && targetReached()) { //1200
             theSound.pause();
             winSong.play();
             document.getElementById('game-board').style.display = 'none';
             document.querySelector('.left-side').style.display = 'none';
             document.getElementById('win').style.display = 'block';
-            endGame();
+            stopGame();
             document.querySelector('.next-level').onclick = () => {
                 currentLevel = 2;
                 player1.y = 600;
@@ -293,7 +279,7 @@ function updateCanvas() {
             document.getElementById('game-board').style.display = 'none';
             document.querySelector('.left-side2').style.display = 'none';
             document.querySelector('#game-over2').style.display = 'block';
-            endGame();
+            stopGame();
             document.querySelector('.restart-button2').onclick = () => {
                 player1.y = 600;
                 frames = 0;
@@ -301,17 +287,15 @@ function updateCanvas() {
                 document.querySelector('#game-over2').style.display = 'none';
                 location.reload();
             };
-
-
         }
         // target reached
-        if (frames > 100 && targetReached()) { //1350
+        if (frames > 1400 && targetReached()) { //1350
             theSound.pause();
             winSong.play();
             document.getElementById('game-board').style.display = 'none';
             document.querySelector('.left-side2').style.display = 'none';
             document.getElementById('win').style.display = 'block';
-            endGame();
+            stopGame();
             document.querySelector('.next-level').onclick = () => {
                 currentLevel = 3;
                 player1.y = 600;
@@ -327,7 +311,7 @@ function updateCanvas() {
             document.getElementById('game-board').style.display = 'none';
             document.querySelector('.left-side3').style.display = 'none';
             document.querySelector('#game-over2').style.display = 'block';
-            endGame();
+            stopGame();
             document.querySelector('.restart-button2').onclick = () => {
                 player1.y = 600;
                 frames = 0;
@@ -335,17 +319,15 @@ function updateCanvas() {
                 document.querySelector('#game-over2').style.display = 'none';
                 location.reload();
             };
-
-
         }
         // target reached
-        if (frames > 150 && targetReached()) { //1500
+        if (frames > 1550 && targetReached()) { //1500
             theSound.pause();
-            winSong.play();
+            lastSong.play();
             document.getElementById('game-board').style.display = 'none';
             document.querySelector('.left-side3').style.display = 'none';
             document.getElementById('win2').style.display = 'block';
-            endGame();
+            stopGame();
             document.querySelector('.final-button').onclick = () => {
                 currentLevel = 3;
                 player1.y = 600;
@@ -355,11 +337,14 @@ function updateCanvas() {
             };
         }
     }
-    animationId = requestAnimationFrame(updateCanvas);
-
+    if (!endGame) {
+        animationId = requestAnimationFrame(updateCanvas);
+    }
 }
 
-// detect collision with obstacles
+// COLLISIONS:
+
+// OBSTACLES
 function detectCollision(obstacle) {
     return !((player1.x > (obstacle.x + 30) + (obstacle.width - 55)) ||
         (player1.x + player1.width < obstacle.x + 30) ||
@@ -367,40 +352,38 @@ function detectCollision(obstacle) {
         (player1.y + player1.height < obstacle.y + 10));
 }
 
+// TARGET
+function targetReached() {
+    if (currentLevel === 1) {
+        return !((player1.x > house1.x + house1.width) ||
+            (player1.x + player1.width < house1.x) ||
+            (player1.y > house1.y + house1.height) ||
+            (player1.y + player1.height < house1.y));
+    } else if (currentLevel === 2) {
+        return !((player1.x > house2.x + house2.width) ||
+            (player1.x + player1.width < house2.x) ||
+            (player1.y > house2.y + house2.height) ||
+            (player1.y + player1.height < house2.y));
+    } else {
+        return !((player1.x > house3.x + house3.width) ||
+            (player1.x + player1.width < house3.x) ||
+            (player1.y > house3.y + house3.height) ||
+            (player1.y + player1.height < house3.y));
+    }
+}
 
-// loop into obstacles array - other way 
-// newObstacles.forEach((obstacle) => {
-//     if (currentLevel === 1) {
-//         obstacle.y += 5;
-//     } else if (currentLevel === 2) {
-//         obstacle.y += 3;
+
+// function getRandomObstacleX(minX, maxX) {
+//     let randomX = Math.floor(Math.random() * (maxX - minX + 1) + minX);
+//     let foundOverlapping = obstacles.some((obstacle) => {
+//         return !((randomX > (obstacle.x + 30) + (obstacle.width - 55)) ||
+//             (randomX + 70 < obstacle.x + 30) ||
+//             (0 > (obstacle.y + 10) + (obstacle.height - 15)) ||
+//             (0 + 70 < obstacle.y + 10));
+//     });
+//     if (foundOverlapping) {
+//         getRandomObstacleX();
 //     } else {
-//         obstacle.y += 4;
+//         return randomX;
 //     }
-
-//     obstacle.draw();
-
-
-//     if (detectCollision(obstacle)) {
-//         theSound.pause();
-//         gameOver.play();
-//         document.getElementById('game-board').style.display = 'none';
-//         document.querySelector('.left-side').style.display = 'none';
-//         document.querySelector('.left-side2').style.display = 'none';
-//         document.querySelector('.left-side3').style.display = 'none';
-//         document.querySelector('#game-over1').style.display = 'block';
-//         obstacles = [];
-//         context.clearRect(0, 0, canvas.width, canvas.height);
-//         frames -= 1000;
-//         player1.y -= 700;
-
-//         document.querySelector('.restart-button').onclick = () => {
-//             player1.y = 600;
-//             frames = 0;
-//             cancelAnimationFrame(animationId);
-//             document.querySelector('#game-over1').style.display = 'none';
-//             location.reload();
-//         };
-//     }
-
-// });
+// }

@@ -74,11 +74,17 @@ body button {
     font-family: 'Press Start 2P';
 }
 
+body button:hover {
+    cursor: pointer;
+    background-color: #056d01;
+    border: 2px solid #056d01;
+}
+
 #game-board {
     margin: 50px;
 }
 
-#vespa {
+.first-vespa {
     /* padding: 60px 0 0 10px; */
     line-height: 100px;
     width: 90px;
@@ -90,11 +96,28 @@ body button {
     animation-timing-function: linear;
 }
 
+.second-vespa {
+    /* padding: 60px 0 0 10px; */
+    line-height: 100px;
+    width: 90px;
+    height: 90px;
+    transform: rotate(30deg);
+}
+
+.last-vespa {
+    /* padding: 60px 0 0 10px; */
+    line-height: 100px;
+    width: 90px;
+    height: 90px;
+    transform: rotate(30deg);
+    animation: bounce 1s infinite;
+}
+
 #boom {
     width: 80px;
     height: 80px;
     animation: shake;
-    animation-duration: 1s;
+    animation-duration: 0.5s;
     animation-iteration-count: 3;
     animation-timing-function: linear;
 }
@@ -111,6 +134,29 @@ body button {
 #win h1 {
     font-size: 2rem;
     margin-bottom: 40px;
+}
+
+#win2 h1 {
+    font-size: 2.5rem;
+    animation: blinker 0.8s linear infinite;
+}
+
+
+#win h2 {
+    animation: blinker 0.8s linear infinite;
+}
+
+.left h1 {
+    animation: blinker 0.8s linear infinite;
+}
+
+.house-level {
+    animation: bounce;
+    animation-duration: 0.5s;
+    animation-iteration-count: 3;
+    animation-timing-function: linear;
+    width: 150px;
+    height: 150px;
 }
 
 @keyframes rotate {
@@ -142,5 +188,41 @@ body button {
     to {
         width: 82px;
         height: 82px;
+    }
+}
+
+@keyframes blinker {
+    50% {
+        opacity: 0;
+    }
+}
+
+@keyframes bounce {
+    0% {
+        transform: scale(1, 1) translateY(-20);
+    }
+
+    10% {
+        transform: scale(1.1, .9) translateY(0);
+    }
+
+    30% {
+        transform: scale(.9, 1.1) translateY(-40px);
+    }
+
+    50% {
+        transform: scale(1.05, .95) translateY(0);
+    }
+
+    57% {
+        transform: scale(1, 1) translateY(-7px);
+    }
+
+    64% {
+        transform: scale(1, 1) translateY(0);
+    }
+
+    100% {
+        transform: scale(1, 1) translateY(-5);
     }
 }

@@ -14,8 +14,10 @@ function sound(src) {
     };
 }*/
 
-const theSound = new Audio("/Users/stefanopisani/Desktop/game/delivery-vespa/music/Super-Mario.mp3");
+const theSound = new Audio("./music/Super-Mario.mp3");
 
-const gameOver = new Audio("/Users/stefanopisani/Desktop/game/delivery-vespa/music/gameover.mp3");
+const gameOver = new Audio("./music/gameover.mp3");
 
-const winSong = new Audio("/Users/stefanopisani/Desktop/game/delivery-vespa/music/Ending Theme - Super Mario World.mp3");
+const winSong = new Audio("./music/Ending Theme - Super Mario World.mp3");
+
+const lastSong = new Audio("./music/ita.mp3");
